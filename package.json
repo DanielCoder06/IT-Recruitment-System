@@ -1,0 +1,41 @@
+{
+  "name": "it-recruitment-system",
+  "version": "1.0.0",
+  "description": "Hệ thống tuyển dụng IT tích hợp NLP",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielCoder06/IT-Recruitment-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DanielCoder06/IT-Recruitment-System/issues"
+  },
+  "homepage": "https://github.com/DanielCoder06/IT-Recruitment-System#readme",
+  "dependencies": {
+    "@prisma/client": "^7.10.1",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.6.6",
+    "prisma": "^8.0.0-rc.30",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^6.0.3"
+  }
+}
