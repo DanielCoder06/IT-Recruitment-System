@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { prisma } from "./configs/prisma.client";
+import { error } from "node:console";
 
 dotenv.config();
 
@@ -15,5 +17,10 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
-  console.log(`Sever is running on http://localhost:${port}`);
+  try {
+    console.log("Connected Database successfully!");
+    console.log(`Sever is running on http://localhost:${port}`);
+  } catch (error) {
+    console.log("Error");
+  }
 });
