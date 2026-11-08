@@ -1,0 +1,25 @@
+extends layouts/main.pug
+
+block styles
+  link(rel="stylesheet", href="/css/form.css")
+
+block content
+    .form-container
+        h2 Đăng ký tài khoản 
+
+        if error 
+           p.error-msg(style="color: red; margin-bottom: 15px; text-align: center;")= error
+
+        form(action="/auth/register" method="POST")
+            .form-group 
+                label Họ và tên
+                input(type="text" name="fullName" required placeholder="Nhập họ và tên...")
+                label Email
+                input(type="email" name="email" required placeholder="Nhập email...")
+                label Mật khẩu
+                input(type="password" name="password" require placeholder="Nhập mật khẩu...")
+                label Bạn là: 
+                select(name="role")
+                    option(value="CANDIDATE") Ứng viên (Tìm việc)
+                    option(value="COMPANY") Công ty (Tuyển dụng)
+            button.btn(type="submit") Đăng ký ngay
