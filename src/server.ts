@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { prisma } from "./configs/prisma.client";
 import authRoute from "./routes/auth.route";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", authRoute);

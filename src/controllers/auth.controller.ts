@@ -33,4 +33,34 @@ export class AuthController {
       });
     }
   }
+
+  static getLoginPage(req: Request, res: Response) {
+    res.render("login", { title: "Đăng nhập" });
+  }
+
+  // 2 Xử lý dữ liệu khi nhấn nút đăng ký
+  static async postLogin(req: Request, res: Response) {
+    try {
+      const { email, password } = req.body;
+      if (!email || !password) {
+        return res.render("login", {
+          title: "Đăng nhập",
+          error: "Vui lòng nhập đầy đủ thông tin",
+        });
+      }
+
+      const { user, token } = await AuthService.login(email, password);
+
+      res.cookie("token", token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+      return res.redirect("/");
+    } catch (error: any) {
+      return res.render("login", {
+        title: "Đăng nhập",
+        error: error.message,
+      });
+    }
+  }
 }
