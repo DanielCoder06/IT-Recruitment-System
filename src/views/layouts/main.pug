@@ -10,12 +10,19 @@ html(lang="en")
         block styles
     body 
         header.navbar
-        .logo
-            a(href="/") IT-Recruitment 
-        nav.menu 
-            a(href="/") Trang chủ
-            a(href="#") Đăng nhập
-            a(href="#") Đăng ký
+            .logo
+                a(href="/") IT-Recruitment 
+        
+        if user
+            nav.menu 
+                a(href="/") Trang chủ
+                a(href="/dashboard") Trang cá nhân 
+                a(href="/auth/logout") Đăng xuất
+        else
+            nav.menu 
+                a(href="/") Trang chủ
+                a(href="/auth/login") Đăng nhập 
+                a(href="/auth/register") Đăng ký
 
         main.container
             block content

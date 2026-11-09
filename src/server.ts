@@ -5,6 +5,8 @@ import path from "path";
 import { prisma } from "./configs/prisma.client";
 import authRoute from "./routes/auth.route";
 import cookieParser from "cookie-parser";
+import dashboardRoute from "./routes/dashboard.route";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 
@@ -21,7 +23,26 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
+// Middleware kiểm tra token
+app.use((req: Request, res: Response, next) => {
+  const token = req.cookies?.token;
+  if (token) {
+    try {
+      // Giải mã token để lấy thông tin
+      const decoded = jwt.verify(
+        token,
+        process.env.JWT_SECRET || "fallback_secret",
+      ) as any;
+      res.locals.user = { id: decoded.userId, role: decoded.role };
+    } catch (e) {
+      // Token lỗi thì bỏ qua
+    }
+  }
+  next();
+});
+
 app.use("/auth", authRoute);
+app.use("/dashboard", dashboardRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.render("home", { title: "Trang chủ hệ thống" });

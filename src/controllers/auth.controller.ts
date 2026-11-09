@@ -34,11 +34,12 @@ export class AuthController {
     }
   }
 
+  // 1 Render giao diện dăng nhập
   static getLoginPage(req: Request, res: Response) {
     res.render("login", { title: "Đăng nhập" });
   }
 
-  // 2 Xử lý dữ liệu khi nhấn nút đăng ký
+  // 2 Xử lý dữ liệu khi nhấn nút đăng nhập
   static async postLogin(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
@@ -62,5 +63,10 @@ export class AuthController {
         error: error.message,
       });
     }
+  }
+
+  static logout(req: Request, res: Response) {
+    res.clearCookie("token");
+    res.redirect("/");
   }
 }
