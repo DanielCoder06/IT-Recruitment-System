@@ -13,6 +13,7 @@ export class AuthController {
   static async postRegister(req: Request, res: Response) {
     try {
       const { email, password, fullName, role } = req.body;
+      //Kiểm tra thong tin
       if (!email || !password || !fullName) {
         return res.render("register", {
           title: "Đăng ký tài khoản",
@@ -20,12 +21,22 @@ export class AuthController {
         });
       }
 
+      // Kiểm tra vai trò
       const userRole =
         role === "COMPANY" ? UserRole.COMPANY : UserRole.CANDIDATE;
 
-      await AuthService.register({ email, fullName, password, role });
+      // Lưu thông tin người dùng vào db
+      await AuthService.register({ email, fullName, password, role: userRole });
 
-      return res.redirect("/");
+      // Tạo token khi vừa đăng ký xong
+      const { token } = await AuthService.login(email, password);
+      res.cookie("token", token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+
+      // Chuyển sang trang dashboard
+      return res.redirect("/dashboard");
     } catch (error: any) {
       return res.render("register", {
         title: "Đăng ký tài khoản",
