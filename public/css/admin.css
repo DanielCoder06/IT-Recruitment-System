@@ -1,0 +1,138 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+body {
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+/* Layout tổng thể */
+.admin-wrapper {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar (Thanh bên trái) */
+.sidebar {
+  width: 260px;
+  background-color: #1e293b; /* Màu tối chuyên nghiệp */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar .brand {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #334155;
+  color: #38bdf8;
+  text-decoration: none;
+}
+.sidebar .menu {
+  list-style: none;
+  padding: 20px 0;
+}
+.sidebar .menu li a {
+  display: block;
+  padding: 15px 25px;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: 0.3s;
+  border-left: 4px solid transparent;
+}
+.sidebar .menu li a:hover,
+.sidebar .menu li a.active {
+  background-color: #334155;
+  color: #fff;
+  border-left-color: #38bdf8;
+}
+
+/* Main Content (Vùng nội dung) */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Topbar (Thanh trên cùng) */
+.topbar {
+  background-color: #fff;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.topbar .user-info {
+  font-weight: 500;
+}
+.topbar .logout-btn {
+  color: #ef4444;
+  text-decoration: none;
+  font-weight: bold;
+}
+.topbar .logout-btn:hover {
+  text-decoration: underline;
+}
+
+/* Nội dung chính */
+.content-area {
+  padding: 30px;
+}
+
+/* Bảng dữ liệu */
+.page-title {
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+.table-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+th,
+td {
+  padding: 15px 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+}
+tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Nhãn Role (Badge) */
+.badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.badge-admin {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.badge-company {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+.badge-candidate {
+  background: #dcfce7;
+  color: #15803d;
+}

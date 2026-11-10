@@ -1,0 +1,29 @@
+extends ./layout.pug
+
+block content
+  h1.page-title Danh sách Người dùng
+  
+  .table-container
+    table
+      thead
+        tr
+          th ID
+          th Họ Tên
+          th Email
+          th Vai trò
+          th Ngày tham gia
+      tbody
+        each u in users
+          tr
+            td(style="color: #64748b; font-size: 14px;")= u.id.substring(0, 8) + '...'
+            td(style="font-weight: 500;")= u.fullName
+            td= u.email
+            td
+              //- Hiển thị nhãn màu dựa vào Role
+              if u.role === 'ADMIN'
+                span.badge.badge-admin Admin
+              else if u.role === 'COMPANY'
+                span.badge.badge-company Công ty
+              else
+                span.badge.badge-candidate Ứng viên
+            td(style="color: #64748b;")= u.createdAt.toLocaleDateString('vi-VN')

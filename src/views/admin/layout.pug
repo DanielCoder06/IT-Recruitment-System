@@ -1,0 +1,33 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", href="/css/admin.css")
+    body 
+        .admin-wrapper
+            //- Sidebar
+            aside.sidebar
+                a.brand(href='/') IT Recruitment Admin
+                ul.menu
+                    li
+                        //- Tự động thêm class 'active' nếu đang ở trang quản lý user
+                        a(href="/admin/users" class=(title === 'Quản lý người dùng' ? 'active' : '')) 
+                            | Quản lý Người dùng
+                    li 
+                        a(href="#") Quản lý bài đăng 
+                    li 
+                        a(href="#") Thống kê hệ thống
+            //- MAIN CONTENT (Vùng nội dung bên phải)
+            .main-content
+                //- TOPBAR (Thanh trên cùng)
+                header.topbar
+                .user-info 
+                    | Chào, 
+                    strong= user ? user.role : 'Admin'
+                a.logout-btn(href="/auth/logout") Đăng xuất
+                
+                //- Nơi chứa nội dung của từng trang (users, jobs...)
+                main.content-area
+                block content

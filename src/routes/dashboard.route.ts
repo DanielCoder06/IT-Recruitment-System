@@ -1,10 +1,9 @@
-import { Router, Response } from "express";
-import { requireAuth, AuthRequest } from "../middlewares/auth.middleware";
-import { title } from "node:process";
+import { Router, Request, Response } from "express";
+import { requireAuth } from "../middlewares/auth.middleware";
 
 const router = Router();
 
-router.get("/", requireAuth, (req: AuthRequest, res: Response) => {
+router.get("/", requireAuth, (req: Request, res: Response) => {
   res.render("dashboard", {
     title: "Trang cá nhân",
     user: req.user,

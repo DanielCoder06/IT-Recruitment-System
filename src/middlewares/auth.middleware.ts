@@ -2,12 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { prisma } from "../configs/prisma.client";
 
-export interface AuthRequest extends Request {
-  user?: any;
-}
-
 export const requireAuth = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {

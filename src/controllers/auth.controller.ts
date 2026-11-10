@@ -67,7 +67,16 @@ export class AuthController {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
       });
-      return res.redirect("/");
+
+      if (user.role === "ADMIN") {
+        return res.redirect("/admin/users"); // Admin vào thẳng quản lý user
+      }
+      if (user.role === "COMPANY") {
+        return res.redirect("/dashboard"); // company/dashboard
+      }
+
+      // Mặc định cho Ứng viên (CANDIDATE)
+      return res.redirect("/dashboard");
     } catch (error: any) {
       return res.render("login", {
         title: "Đăng nhập",

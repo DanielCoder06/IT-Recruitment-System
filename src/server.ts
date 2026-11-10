@@ -7,6 +7,8 @@ import authRoute from "./routes/auth.route";
 import cookieParser from "cookie-parser";
 import dashboardRoute from "./routes/dashboard.route";
 import jwt from "jsonwebtoken";
+import { AdminController } from "./controllers/admin.controller";
+import adminRoute from "./routes/admin.route";
 
 dotenv.config();
 
@@ -43,6 +45,7 @@ app.use((req: Request, res: Response, next) => {
 
 app.use("/auth", authRoute);
 app.use("/dashboard", dashboardRoute);
+app.use("/admin", adminRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.render("home", { title: "Trang chủ hệ thống" });
