@@ -19,6 +19,31 @@ model User {
   password  String
   fullName  String
   role      UserRole @default(CANDIDATE)
+  
+  job       Job[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum JobStatus{
+  DRAFT     // Nháp 
+  PUBLISHED    // Đang tuyển dụng
+  CLOSED    // Đã đóng 
+}
+
+model Job {
+  id          String    @id @default(uuid())
+  title       String    // Tiêu đề công việc
+  description String    // Mô tả công việc
+  location    String    // Địa điểm 
+  salary      String    // Mức lương 
+  skills      String[]  // Mảng kỹ năng 
+  status      JobStatus @default(PUBLISHED)
+  
+  // Khóa ngoại liên kết với bảng User (người đăng bài - có role COMPANY)
+  companyId   String
+  company     User      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
