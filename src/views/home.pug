@@ -1,4 +1,17 @@
 extends layouts/main.pug
 
+block styles
+    link(rel="stylesheet", href="/css/home.css")
+    link(rel="stylesheet", href="/css/form.css")
+
 block content
-    h1 Chào mừng đến với Hệ thống Tuyển dụng IT!
+    .hero-section
+        h1 Chào mừng đến với Hệ thống Tuyển dụng IT
+        p Nền tảng kết nối hàng ngàn lập trình viên tài năng với các công ty công nghệ hàng đầu. Tìm kiếm công việc mơ ước của bạn ngay hôm nay!
+        
+        .hero-actions
+            if user
+                a.btn(href="/dashboard") Vào Trang Cá Nhân
+            else
+                a.btn(href="/auth/register") Bắt đầu ngay
+                a.btn.btn-outline(href="/auth/login") Đăng nhập
