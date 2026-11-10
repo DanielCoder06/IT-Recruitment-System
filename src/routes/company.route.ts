@@ -10,5 +10,6 @@ router.use(requireAuth);
 router.use(requireRole(UserRole.COMPANY));
 
 router.get("/dashboard", CompanyController.getDashboard);
+router.get("/jobs", CompanyController.getJobs);
 
 export default router;

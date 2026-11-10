@@ -7,4 +7,13 @@ export class CompanyController {
       user: req.user,
     });
   }
+
+  // Hiển thị danh sách blog jobs
+  static getJobs(req: Request, res: Response) {
+    res.render("company/jobs", {
+      title: "Quản lý bài đăng",
+      user: req.user,
+      job: [],
+    });
+  }
 }

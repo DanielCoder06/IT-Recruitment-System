@@ -19,8 +19,8 @@ body {
 
 /* Sidebar (Thanh bên trái) */
 .sidebar {
-  width: 20%;
-  background-color: #1e293b; /* Màu tối chuyên nghiệp */
+  width: 250px;
+  background-color: #1e293b;
   color: #fff;
   display: flex;
   flex-direction: column;
