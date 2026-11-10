@@ -6,7 +6,7 @@ import { error } from "node:console";
 export class AuthController {
   // 1 Render giao diện dăng ký tài khoản
   static getRegisterPage(req: Request, res: Response) {
-    res.render("register", { title: "Đăng ký tài khoản" });
+    res.render("auth/register", { title: "Đăng ký tài khoản" });
   }
 
   // 2 Xử lý dữ liệu khi nhấn nút đăng ký
@@ -15,7 +15,7 @@ export class AuthController {
       const { email, password, fullName, role } = req.body;
       //Kiểm tra thong tin
       if (!email || !password || !fullName) {
-        return res.render("register", {
+        return res.render("auth/register", {
           title: "Đăng ký tài khoản",
           error: "Vui lòng nhập đầy đủ thông tin",
         });
@@ -47,7 +47,7 @@ export class AuthController {
 
   // 1 Render giao diện dăng nhập
   static getLoginPage(req: Request, res: Response) {
-    res.render("login", { title: "Đăng nhập" });
+    res.render("auth/login", { title: "Đăng nhập" });
   }
 
   // 2 Xử lý dữ liệu khi nhấn nút đăng nhập
@@ -55,7 +55,7 @@ export class AuthController {
     try {
       const { email, password } = req.body;
       if (!email || !password) {
-        return res.render("login", {
+        return res.render("auth/login", {
           title: "Đăng nhập",
           error: "Vui lòng nhập đầy đủ thông tin",
         });
@@ -78,7 +78,7 @@ export class AuthController {
       // Mặc định cho Ứng viên (CANDIDATE)
       return res.redirect("/dashboard");
     } catch (error: any) {
-      return res.render("login", {
+      return res.render("auth/login", {
         title: "Đăng nhập",
         error: error.message,
       });
