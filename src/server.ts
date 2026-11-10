@@ -9,6 +9,7 @@ import dashboardRoute from "./routes/dashboard.route";
 import jwt from "jsonwebtoken";
 import { AdminController } from "./controllers/admin.controller";
 import adminRoute from "./routes/admin.route";
+import companyRoute from "./routes/company.route";
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ app.use((req: Request, res: Response, next) => {
 app.use("/auth", authRoute);
 app.use("/dashboard", dashboardRoute);
 app.use("/admin", adminRoute);
+app.use("/company", companyRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.render("home", { title: "Trang chủ hệ thống" });

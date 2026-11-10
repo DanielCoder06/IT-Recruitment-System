@@ -1,0 +1,104 @@
+/* public/css/company.css */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+body {
+  background-color: #f4f7f6;
+  color: #333;
+}
+a {
+  text-decoration: none;
+}
+
+/* Layout tổng thể */
+.company-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Topbar (Thanh trên cùng) */
+.topbar {
+  height: 60px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+.topbar .logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #0056b3;
+}
+.topbar .user-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.topbar .user-actions a {
+  color: #475569;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.topbar .user-actions a:hover {
+  color: #0056b3;
+}
+.topbar .user-actions .btn-logout {
+  color: #ef4444;
+}
+
+/* Thân trang (Sidebar + Nội dung) */
+.body-wrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar (Aside) */
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  border-right: 1px solid #e2e8f0;
+  padding-top: 20px;
+}
+.sidebar .menu {
+  list-style: none;
+}
+.sidebar .menu li a {
+  display: block;
+  padding: 15px 25px;
+  color: #475569;
+  font-weight: 500;
+  transition: 0.2s;
+  border-right: 3px solid transparent;
+}
+.sidebar .menu li a:hover,
+.sidebar .menu li a.active {
+  background-color: #f0f7ff;
+  color: #007bff;
+  border-right-color: #007bff;
+}
+
+/* Main Content (Nội dung chính) */
+.main-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+.page-title {
+  margin-bottom: 20px;
+  color: #1e293b;
+  font-size: 24px;
+}
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}

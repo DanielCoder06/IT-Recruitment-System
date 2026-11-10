@@ -1,0 +1,33 @@
+doctype html
+html(lang="vi")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet", href="/css/company.css")
+  body
+    .company-layout
+      //- TOPBAR
+      header.topbar
+        .logo IT Recruitment Company
+        .user-actions
+          a(href="/company/profile") Trang cá nhân
+          a.btn-logout(href="/auth/logout") Đăng xuất
+        
+      //- BODY WRAPPER
+      .body-wrapper
+        //- SIDEBAR (ASIDE)
+        aside.sidebar
+          ul.menu
+            li 
+              a(href="/company/dashboard" class=(title === 'Dashboard Công ty' ? 'active' : '')) Tổng quan
+            li 
+              a(href="/company/jobs" class=(title === 'Quản lý bài đăng' ? 'active' : '')) Quản lý bài đăng
+            li 
+              a(href="/company/applications" class=(title === 'Quản lý đơn ứng tuyển' ? 'active' : '')) Quản lý đơn ứng tuyển
+            li 
+              a(href="/company/profile" class=(title === 'Hồ sơ công ty' ? 'active' : '')) Hồ sơ công ty
+
+        //- MAIN CONTENT
+        main.main-content
+          block content
