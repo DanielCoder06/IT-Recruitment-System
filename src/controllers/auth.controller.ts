@@ -72,7 +72,7 @@ export class AuthController {
         return res.redirect("/admin/users"); // Admin vào thẳng quản lý user
       }
       if (user.role === "COMPANY") {
-        return res.redirect("/dashboard"); // company/dashboard
+        return res.redirect("/company/dashboard"); // company/dashboard
       }
 
       // Mặc định cho Ứng viên (CANDIDATE)
