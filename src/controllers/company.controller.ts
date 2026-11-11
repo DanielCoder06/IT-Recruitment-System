@@ -16,4 +16,12 @@ export class CompanyController {
       job: [],
     });
   }
+
+  // Giao diện tạo bài đăng
+  static getCreateJobPage(req: Request, res: Response) {
+    res.render("company/create-job", {
+      title: "Đăng bài mới",
+      user: req.user,
+    });
+  }
 }

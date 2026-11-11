@@ -1,0 +1,45 @@
+extends ./layout.pug
+
+block styles
+  link(rel="stylesheet", href="/css/job.css")
+
+block content
+  h1.page-title(style="text-align: center") Đăng bài tuyển dụng mới
+  
+  .form-wrapper
+    form(action="/company/jobs/create" method="POST")
+      .form-group
+        label Tiêu đề công việc (*)
+        input(type="text" name="title" required placeholder="VD: Tuyển Backend Developer Node.js")
+      
+      .form-row
+        .form-group
+          label Địa điểm (*)
+          input(type="text" name="location" required placeholder="VD: Hà Nội, TP.HCM, Remote")
+        .form-group
+          label Mức lương (*)
+          input(type="text" name="salary" required placeholder="VD: 1000$ - 1500$")
+      
+      .form-group
+        label Kỹ năng (Cách nhau bằng dấu phẩy)
+        input(type="text" name="skills" placeholder="VD: Node.js, React, MongoDB")
+      
+      .form-group
+        label Mô tả công việc (*)
+        //- Thêm id="editor" để CKEditor tìm thấy
+        textarea#editor(name="description" required placeholder="Mô tả chi tiết về công việc, yêu cầu, quyền lợi...")
+      
+      div(style="margin-top: 30px;")
+        button.btn-submit(type="submit") Đăng tuyển dụng
+        a.btn-cancel(href="/company/jobs") Hủy
+
+  //- Nhúng CKEditor 5 từ CDN
+  script(src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js")
+  
+  //- Khởi tạo CKEditor
+  script.
+    ClassicEditor
+      .create(document.querySelector('#editor'))
+      .catch(error => {
+        console.error(error);
+      });
