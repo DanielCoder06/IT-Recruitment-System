@@ -23,7 +23,8 @@ block content
                 else 
                     each job in jobs
                         tr 
-                            td(style="font-weight: 500;")= job.title
+                            td
+                                a.job-title-link(href=`/company/jobs/${job.id}`)= job.title
                             td= job.salary
                             td 
                                 if job.status === 'PUBLISHED'
@@ -31,5 +32,7 @@ block content
                                 else
                                     span.status-badge.status-draft Bản nháp
                             td.action-links
+                                a.btn-view(href=`/company/jobs/${job.id}` style="color: #007bff; margin-right: 10px;")
+                                    | Xem
                                 a.btn-edit(href="#") Sửa
                                 a.btn-delete(href="#") Xóa

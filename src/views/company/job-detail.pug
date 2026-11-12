@@ -1,0 +1,30 @@
+extends ./layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/job.css")
+block content
+    //- Nút quay lại
+    a.btn-back(href="/company/jobs") ← Quay lại danh sách
+
+    .job-detail-container
+        .job-header
+            h1.job-title= job.title
+            .job-meta
+                div 
+                    strong Địa điểm: 
+                    span= job.location
+                div 
+                    strong Mức lương: 
+                    span= job.salary
+                div 
+                    strong Trạng thái: 
+                    span= job.status === 'PUBLISHED' ? 'Đang tuyển' : 'Bản nháp'
+            
+            .job-skills
+                each skill in job.skills
+                    span.skill-tag= skill
+
+        .job-description
+            h3 Mô tả công việc
+            //- Dùng != để render HTML từ CKEditor
+            div!= job.description

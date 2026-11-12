@@ -23,13 +23,17 @@ html(lang="vi")
         aside.sidebar
           ul.menu
             li 
-              a(href="/company/dashboard" class=(title === 'Dashboard Công ty' ? 'active' : '')) Tổng quan
+              a(href="/company/dashboard" class=(currentPath.startsWith('/company/dashboard') ? 'active' : ''))
+                | Tổng quan
             li 
-              a(href="/company/jobs" class=(title === 'Quản lý bài đăng' ? 'active' : '')) Quản lý bài đăng
+              a(href="/company/jobs" class=(currentPath.startsWith('/company/jobs') ? 'active' : ''))
+                | Quản lý bài đăng
             li 
-              a(href="/company/applications" class=(title === 'Quản lý đơn ứng tuyển' ? 'active' : '')) Quản lý đơn ứng tuyển
+              a(href="/company/applications" class=(title === 'Quản lý đơn ứng tuyển' ? 'active' : ''))
+                | Quản lý đơn ứng tuyển
             li 
-              a(href="/company/profile" class=(title === 'Hồ sơ công ty' ? 'active' : '')) Hồ sơ công ty
+              a(href="/company/profile" class=(title === 'Hồ sơ công ty' ? 'active' : ''))
+                | Hồ sơ công ty
 
         //- MAIN CONTENT
         main.main-content

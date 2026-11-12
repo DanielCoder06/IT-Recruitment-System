@@ -13,5 +13,8 @@ router.get("/dashboard", CompanyController.getDashboard);
 router.get("/jobs", CompanyController.getJobs);
 router.get("/jobs/create", CompanyController.getCreateJobPage);
 router.post("/jobs/create", CompanyController.postCreateJob);
+router.get("/jobs/:id", CompanyController.getJobDetail);
+router.get("/jobs/:id/edit", CompanyController.getEditJobPage);
+router.post("/jobs/:id/edit", CompanyController.postUpdateJob);
 
 export default router;

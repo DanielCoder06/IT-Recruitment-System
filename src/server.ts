@@ -41,6 +41,7 @@ app.use((req: Request, res: Response, next) => {
       // Token lỗi thì bỏ qua
     }
   }
+  res.locals.currentPath = req.path;
   next();
 });
 

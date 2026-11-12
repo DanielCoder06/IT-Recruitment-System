@@ -77,11 +77,16 @@ a {
   transition: 0.2s;
   border-right: 3px solid transparent;
 }
-.sidebar .menu li a:hover,
 .sidebar .menu li a.active {
   background-color: #f0f7ff;
   color: #007bff;
   border-right-color: #007bff;
+}
+.sidebar .menu li a:hover {
+  background-color: #007bff;
+  color: #f0f7ff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.35);
 }
 
 /* Main Content (Nội dung chính) */

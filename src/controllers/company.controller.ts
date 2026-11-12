@@ -102,4 +102,41 @@ export class CompanyController {
       res.status(500).send("Có lỗi xảy ra khi đăng bài: " + error.message);
     }
   }
+
+  // Hiện thị chi tiết bài đăng
+  static async getJobDetail(req: Request, res: Response) {
+    try {
+      const id = req.params.id as string;
+      const companyId = req.user?.id;
+
+      // Tìm bài đăng của công ty theo id
+      const job = await prisma.job.findFirst({
+        where: {
+          id: id,
+          companyId: companyId,
+        },
+      });
+
+      if (!job) {
+        return res
+          .status(404)
+          .send("Không tìm thấy bài đăng hoặc bạn không có quyền xem!");
+      }
+
+      res.render("company/job-detail", {
+        title: job.title,
+        user: req.user,
+        job: job,
+      });
+    } catch (error: any) {
+      res.status(500).send("Lỗi tải chi tiết bài đăng: " + error.message);
+    }
+  }
+
+  // Hiển thị form sửa bài đăng
+  static async getEditJobPage(req: Request, res: Response) {
+    res.render("");
+  }
+  // Xử liệu dữ liệu khi ấn nút cập nhật bài đăng
+  static async postUpdateJob(req: Request, res: Response);
 }
