@@ -16,9 +16,9 @@ block content
                     th Trạng thái
                     th Hành động
             tbody 
-                if job.length === 0
+                if jobs.length === 0
                     tr
-                        td.empty-state(colspan="5")
+                        td.empty-state(colspan="4")
                             | Bạn chưa có bài đăng tuyển dụng nào. Hãy bấm "Đăng bài mới" để bắt đầu!
                 else 
                     each job in jobs
