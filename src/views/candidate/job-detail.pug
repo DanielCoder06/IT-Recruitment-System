@@ -1,0 +1,31 @@
+extends ./layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/job-search.css")
+
+block content 
+    //- Nút quay lại
+    a.btn-back(href="/jobs" style="display: inline-flex; align-items: center; margin-bottom: 20px; color: #64748b; font-weight: 600;")
+        svg(xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;")
+            path(fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z")
+        | Quay lại danh sách việc làm
+
+    .job-detail-card 
+        .job-detail-header
+            h1.job-detail-title= job.title
+            .job-detail-meta 
+                span.company-name Công ty: #{job.company.fullName}
+                span.company-location Địa điểm: #{job.location}
+            .job-detail-salary= job.salary
+        .job-detail-skills
+            each skill in job.skills
+                span.skill-tag= skill
+        .job-detail-content
+            div.job-description!= job.description
+        .job-detail-footer
+            if user && user.role === 'CANDIDATE'
+                form(action=`/jobs/${job.id}/apply` method="POST")
+                    button.btn-apply(type='submit') Ứng tuyển ngay
+            else 
+                p(style="color: #ef4444; font-weight: bold;")
+                    | Bạn cần đăng nhập bằng tài khoản Ứng viên để ứng tuyển.

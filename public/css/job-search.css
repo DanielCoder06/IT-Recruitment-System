@@ -17,6 +17,7 @@
     box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
+  position: relative;
   border: 1px solid #e2e8f0;
   height: 100%; /* Đảm bảo các thẻ cao bằng nhau */
 }
@@ -45,6 +46,17 @@
 
 .job-card-title:hover {
   color: #10b981;
+}
+
+.job-card-title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  cursor: pointer;
 }
 
 /* Tên công ty */
@@ -95,4 +107,105 @@
   .job-grid {
     grid-template-columns: 1fr; /* Điện thoại: 1 cột */
   }
+}
+
+/* --- CSS CHO TRANG CHI TIẾT VIỆC LÀM --- */
+.job-detail-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.job-detail-header {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.job-detail-title {
+  font-size: 26px;
+  color: #1e293b;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.job-detail-meta {
+  display: flex;
+  gap: 20px;
+  color: #64748b;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.job-detail-salary {
+  font-size: 20px;
+  font-weight: bold;
+  color: #10b981;
+}
+
+.job-detail-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.job-detail-skills .skill-tag {
+  background: #ecfdf5;
+  color: #10b981;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #10b981;
+}
+
+.job-detail-content {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #334155;
+  margin-bottom: 30px;
+}
+
+.job-detail-content h3 {
+  color: #1e293b;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.job-description ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.job-description p {
+  margin-bottom: 10px;
+}
+
+.job-detail-footer {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 30px;
+  text-align: center;
+}
+
+.btn-apply {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    transform 0.2s;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+.btn-apply:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
 }

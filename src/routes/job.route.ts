@@ -5,5 +5,6 @@ const router = Router();
 
 // Route public
 router.get("/", JobController.getJobList);
+router.get("/:id", JobController.getJobDetail);
 
 export default router;
