@@ -11,6 +11,8 @@ import jwt from "jsonwebtoken";
 import adminRoute from "./routes/admin.route";
 import companyRoute from "./routes/company.route";
 import candidateRoute from "./routes/candidate.route";
+import jobRoute from "./routes/job.route";
+
 dotenv.config();
 
 const app = express();
@@ -50,6 +52,7 @@ app.use("/dashboard", dashboardRoute);
 app.use("/admin", adminRoute);
 app.use("/company", companyRoute);
 app.use("/candidate", candidateRoute);
+app.use("/jobs", jobRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.render("home", { title: "Trang chủ hệ thống" });

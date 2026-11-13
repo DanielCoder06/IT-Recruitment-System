@@ -1,0 +1,25 @@
+extends ./layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/job-search.css")
+
+block content
+    h1.page-title Cơ hội việc làm IT
+
+    if jobs.length === 0
+        p(style="color: #64748b;")
+            | Hiện tại chưa có công việc nào đang tuyển. Vui lòng quay lại sau!
+    else 
+        .job-grid
+            each job in jobs    
+                .job-card 
+                    a.job-card-title(href=`/jobs/${job.id}`)= job.title
+                    .job-card-company   
+                        svg(xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16")
+                            path(d="M2.5 1A1.5 1.5 0 0 0 1 2.5v1A1.5 1.5 0 0 0 2.5 5h1A1.5 1.5 0 0 0 5 3.5v-1A1.5 1.5 0 0 0 3.5 1h-1Z")
+                        span= job.company.fullName
+                    .job-card-salary= job.salary 
+                    .job-card-tags
+                        each skill in job.skills
+                            span.job-tag= skill
+    
