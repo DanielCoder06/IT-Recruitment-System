@@ -16,5 +16,6 @@ router.post("/jobs/create", CompanyController.postCreateJob);
 router.get("/jobs/:id", CompanyController.getJobDetail);
 router.get("/jobs/:id/edit", CompanyController.getEditJobPage);
 router.post("/jobs/:id/edit", CompanyController.postUpdateJob);
+router.post("/jobs/:id/delete", CompanyController.postDeleteJob);
 
 export default router;

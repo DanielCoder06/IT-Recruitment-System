@@ -3,13 +3,12 @@ extends ./layout.pug
 block styles
     link(rel="stylesheet", href="/css/job.css")
 block content   
-    if success === 'updated'
+    if success 
         div#success-message.toast-message
             svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#10b981" width="24" height="24")
                 circle(cx="12" cy="12" r="12")
                 path(d="M17.5 7.5L10 15L6.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none")
-            
-            span Cập nhật bài đăng thành công!
+            span= success === 'updated' ? 'Cập nhật bài đăng thành công!' : 'Xóa bài đăng thành công!'
 
     .page-header
         h1.page-title Quản lý bài đăng tuyển dụng
@@ -21,12 +20,13 @@ block content
                 tr
                     th Tiêu đề
                     th Mức lương
+                    th Ngày đăng
                     th Trạng thái
                     th Hành động
             tbody 
                 if jobs.length === 0
                     tr
-                        td.empty-state(colspan="4")
+                        td.empty-state(colspan="5")
                             | Bạn chưa có bài đăng tuyển dụng nào. Hãy bấm "Đăng bài mới" để bắt đầu!
                 else 
                     each job in jobs
@@ -34,15 +34,19 @@ block content
                             td
                                 a.job-title-link(href=`/company/jobs/${job.id}`)= job.title
                             td= job.salary
+                            td= job.createdAt.toLocaleDateString('vi-VN')
                             td 
                                 if job.status === 'PUBLISHED'
                                     span.status-badge.status-published Đang tuyển 
                                 else
                                     span.status-badge.status-draft Bản nháp
                             td.action-links
-                                a.btn-view(href=`/company/jobs/${job.id}` style="color: #007bff; margin-right: 10px;")
+                                a.btn-view(href=`/company/jobs/${job.id}`)
                                     | Xem
-                                a.btn-edit(href=`/company/jobs/${job.id}/edit`) Sửa
-                                a.btn-delete(href="#") Xóa
+                                a.btn-edit(href=`/company/jobs/${job.id}/edit`)
+                                    | Sửa
+                                form.delete-form(action=`/company/jobs/${job.id}/delete` method="POST")
+                                    button.btn-delete(type="submit")
+                                        |  Xóa
     
     script(src="/js/jobs.js") 

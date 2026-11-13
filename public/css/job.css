@@ -1,3 +1,31 @@
+/* Khung căn lề trên cùng */
+.detail-header-wrapper {
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+
+/* Style cho chữ Quay lại giống h1 */
+.title-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px; /* To bằng h1 */
+  font-weight: 700; /* In đậm */
+  color: #1e293b; /* Màu xanh đen giống h1 */
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Hiệu ứng khi rê chuột vào */
+.title-back:hover {
+  color: #007bff; /* Đổi sang màu xanh dương */
+}
+
+.title-back:hover svg {
+  transform: translateX(-5px); /* Icon nhích nhẹ sang trái */
+  transition: transform 0.2s ease;
+}
+
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -41,7 +69,7 @@ th {
   font-weight: 600;
 }
 tr:hover {
-  background-color: #f5f3f3;
+  background-color: #d8d8d8;
 }
 
 /* Trạng thái bài đăng */
@@ -76,13 +104,34 @@ tr:hover {
   font-weight: 500;
   text-decoration: none;
 }
-.action-links .btn-delete {
-  color: #ef4444;
+/* Nút Xem */
+.action-links .btn-view {
+  color: #3b82f6; /* Màu xanh dương đồng bộ với bảng màu của bạn */
+  margin-right: 10px;
 }
+
+/* Nút Sửa */
 .action-links .btn-edit {
   color: #f59e0b;
+  margin-right: 10px;
 }
-.action-links a:hover {
+
+/* Nút Xóa */
+.action-links .btn-delete {
+  color: #ef4444;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+/* Thẻ form nằm cùng hàng với view edit */
+.action-links .delete-form {
+  display: inline;
+}
+
+/* Hiệu ứng hover chung cho cả thẻ a (Xem, Sửa) và button (Xóa) */
+.action-links a:hover,
+.action-links .btn-delete:hover {
   text-decoration: underline;
 }
 
@@ -225,16 +274,6 @@ tr:hover {
 }
 .job-description li {
   margin-bottom: 8px;
-}
-.btn-back {
-  display: inline-block;
-  margin-bottom: 20px;
-  color: #007bff;
-  font-weight: 600;
-  text-decoration: none;
-}
-.btn-back:hover {
-  text-decoration: underline;
 }
 
 /* Hiệu ứng Popup nổi góc phải trên */

@@ -3,8 +3,11 @@ extends ./layout.pug
 block styles
     link(rel="stylesheet", href="/css/job.css")
 block content
-    //- Nút quay lại
-    a.btn-back(href="/company/jobs") ← Quay lại danh sách
+    .detail-header-wrapper
+        a.title-back(href="/company/jobs")
+            svg(xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16")
+                path(fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z")
+            | Quay lại danh sách
 
     .job-detail-container
         .job-header
@@ -16,6 +19,9 @@ block content
                 div 
                     strong Mức lương: 
                     span= job.salary
+                div 
+                    strong Ngày đăng: 
+                    span= job.createdAt.toLocaleDateString('vi-VN')
                 div 
                     strong Trạng thái: 
                     span= job.status === 'PUBLISHED' ? 'Đang tuyển' : 'Bản nháp'

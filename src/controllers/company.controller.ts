@@ -163,6 +163,7 @@ export class CompanyController {
       res.status(500).send("Lỗi tải trang sửa: " + error.message);
     }
   }
+
   // Xử liệu dữ liệu khi ấn nút cập nhật bài đăng
   static async postUpdateJob(req: Request, res: Response) {
     try {
@@ -218,6 +219,32 @@ export class CompanyController {
       res.redirect("/company/jobs?success=updated");
     } catch (error: any) {
       res.status(500).send("Lỗi cập nhật: " + error.message);
+    }
+  }
+
+  // Xử lý xóa bài đăng
+  static async postDeleteJob(req: Request, res: Response) {
+    try {
+      const id = req.params.id as string;
+      const companyId = req.user?.id;
+      const existingJob = await prisma.job.findFirst({
+        where: {
+          id: id,
+          companyId: companyId,
+        },
+      });
+
+      if (!existingJob) {
+        return res.status(404).send("Không có quyền xóa bài này!");
+      }
+
+      await prisma.job.delete({
+        where: { id: id },
+      });
+
+      res.redirect("/company/jobs?success=deleted");
+    } catch (error: any) {
+      res.status(500).send("Lỗi xóa: " + error.message);
     }
   }
 }
