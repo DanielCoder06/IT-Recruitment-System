@@ -3,6 +3,14 @@ extends ./layout.pug
 block styles
     link(rel="stylesheet", href="/css/job.css")
 block content   
+    if success === 'updated'
+        div#success-message.toast-message
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#10b981" width="24" height="24")
+                circle(cx="12" cy="12" r="12")
+                path(d="M17.5 7.5L10 15L6.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none")
+            
+            span Cập nhật bài đăng thành công!
+
     .page-header
         h1.page-title Quản lý bài đăng tuyển dụng
         a.btn-primary(href="/company/jobs/create") + Đăng bài mới
@@ -36,3 +44,5 @@ block content
                                     | Xem
                                 a.btn-edit(href=`/company/jobs/${job.id}/edit`) Sửa
                                 a.btn-delete(href="#") Xóa
+    
+    script(src="/js/jobs.js") 

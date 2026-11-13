@@ -236,3 +236,36 @@ tr:hover {
 .btn-back:hover {
   text-decoration: underline;
 }
+
+/* Hiệu ứng Popup nổi góc phải trên */
+.toast-message {
+  position: fixed; /* Nổi lên trên, không đẩy các phần tử khác */
+  top: 80px; /* Cách mép trên 80px (vừa qua thanh topbar) */
+  right: 30px; /* Cách mép phải 30px */
+  z-index: 9999; /* Luôn nằm trên cùng, không bị che khuất */
+
+  background-color: #fff;
+  color: #065f46;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Đổ bóng tạo chiều sâu */
+  border-left: 5px solid #10b981; /* Viền xanh bên trái cho đẹp */
+
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Khoảng cách giữa icon và chữ */
+
+  /* Hiệu ứng mượt mà khi xuất hiện/biến mất */
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Ban đầu ẩn đi và đẩy sang phải 100% (để tạo hiệu ứng trượt vào) */
+  transform: translateX(120%);
+  opacity: 0;
+}
+
+/* Khi có class .show thì trượt vào */
+.toast-message.show {
+  transform: translateX(0);
+  opacity: 1;
+}

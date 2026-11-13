@@ -44,4 +44,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // 6 Confirm update
+  // const editForm = document.getElementById("editForm");
+  // if (editForm) {
+  //   editForm.addEventListener("submit", (e) => {
+  //     if (isDirty) {
+  //       const confirmSave = confirm(
+  //         "Bạn có chắc chắn muốn lưu các thay đổi này không?",
+  //       );
+  //       if (!confirmSave) {
+  //         e.preventDefault;
+  //       } else {
+  //         isDirty = false;
+  //       }
+  //     }
+  //   });
+  // }
 });

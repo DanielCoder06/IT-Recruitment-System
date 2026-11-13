@@ -32,6 +32,7 @@ export class CompanyController {
         title: "Quản lý bài đăng",
         user: req.user,
         jobs: jobs,
+        success: req.query.success,
       });
     } catch (error: any) {
       console.error("Lỗi lấy danh sách job:", error);
@@ -214,7 +215,7 @@ export class CompanyController {
         },
       });
 
-      res.redirect("/company/jobs");
+      res.redirect("/company/jobs?success=updated");
     } catch (error: any) {
       res.status(500).send("Lỗi cập nhật: " + error.message);
     }
