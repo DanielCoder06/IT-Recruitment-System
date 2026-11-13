@@ -1,0 +1,38 @@
+doctype html
+html(lang="vi")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		title= title
+		link(rel="stylesheet", href="/css/candidate.css")
+
+		block styles
+
+	body
+		.candidate-layout
+			//- TOPBAR
+			header.topbar
+				.logo IT Recruitment Candidate
+				.user-actions
+					a(href="/candidate/profile") Hồ sơ cá nhân
+					a.btn-logout(href="/auth/logout") Đăng xuất
+		
+			//- BODY WRAPPER
+			.body-wrapper
+				aside.sidebar
+					ul.menu 
+						li 
+							a(href="/candidate/dashboard" class=(currentPath === '/candidate/dashboard' ? 'active' : ''))
+								| Tổng quan
+						li 
+							a(href="/jobs" class=(currentPath.startsWith('/jobs') ? 'active' : ''))
+								| Tìm việc làm
+						li 
+							a(href="/candidate/applications" class=(currentPath === '/candidate/applications' ? 'active' : ''))
+								| Việc đã ứng tuyển
+						li 	
+							a(href="/candidate/profile" class=(currentPath === '/candidate/profile' ? 'active' : ''))
+								| Hồ sơ & CV
+
+				main.main-content
+					block content

@@ -2,15 +2,15 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
-import { prisma } from "./configs/prisma.client";
+// import { prisma } from "./configs/prisma.client";
 import authRoute from "./routes/auth.route";
 import cookieParser from "cookie-parser";
 import dashboardRoute from "./routes/dashboard.route";
 import jwt from "jsonwebtoken";
-import { AdminController } from "./controllers/admin.controller";
+// import { AdminController } from "./controllers/admin.controller";
 import adminRoute from "./routes/admin.route";
 import companyRoute from "./routes/company.route";
-
+import candidateRoute from "./routes/candidate.route";
 dotenv.config();
 
 const app = express();
@@ -49,6 +49,7 @@ app.use("/auth", authRoute);
 app.use("/dashboard", dashboardRoute);
 app.use("/admin", adminRoute);
 app.use("/company", companyRoute);
+app.use("/candidate", candidateRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.render("home", { title: "Trang chủ hệ thống" });

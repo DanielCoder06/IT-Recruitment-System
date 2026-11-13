@@ -29,14 +29,19 @@ export class AuthController {
       await AuthService.register({ email, fullName, password, role: userRole });
 
       // Tạo token khi vừa đăng ký xong
-      const { token } = await AuthService.login(email, password);
+      const { user, token } = await AuthService.login(email, password);
       res.cookie("token", token, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
       });
 
-      // Chuyển sang trang dashboard
-      return res.redirect("/dashboard");
+      if (user.role === "COMPANY") {
+        return res.redirect("/company/dashboard");
+      }
+
+      if (user.role === "CANDIDATE") {
+        return res.redirect("/candidate/dashboard");
+      }
     } catch (error: any) {
       return res.render("register", {
         title: "Đăng ký tài khoản",
@@ -73,6 +78,9 @@ export class AuthController {
       }
       if (user.role === "COMPANY") {
         return res.redirect("/company/dashboard"); // company/dashboard
+      }
+      if (user.role === "CANDIDATE") {
+        return res.redirect("/candidate/dashboard"); // candidate/dashboard
       }
 
       // Mặc định cho Ứng viên (CANDIDATE)
