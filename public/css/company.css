@@ -83,8 +83,8 @@ a {
   border-right-color: #007bff;
 }
 .sidebar .menu li a:hover {
-  background-color: #007bff;
-  color: #f0f7ff;
+  background-color: #f0f7ff;
+  color: #007bff;
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(0, 123, 255, 0.35);
 }

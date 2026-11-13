@@ -33,7 +33,7 @@ table {
 th,
 td {
   padding: 15px;
-  border-bottom: 1px solid #e2ffe8f0;
+  border-bottom: 1px solid #f6f3f3f0;
 }
 th {
   background-color: #f8fafc;
@@ -41,7 +41,7 @@ th {
   font-weight: 600;
 }
 tr:hover {
-  background-color: #e6e6e6;
+  background-color: #f5f3f3;
 }
 
 /* Trạng thái bài đăng */

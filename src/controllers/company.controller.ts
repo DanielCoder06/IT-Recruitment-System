@@ -135,8 +135,88 @@ export class CompanyController {
 
   // Hiển thị form sửa bài đăng
   static async getEditJobPage(req: Request, res: Response) {
-    res.render("");
+    try {
+      const id = req.params.id as string;
+      const companyId = req.user?.id;
+
+      // Lấy bài đăng của công ty
+      const job = await prisma.job.findFirst({
+        where: {
+          id: id,
+          companyId: companyId,
+        },
+      });
+
+      if (!job) {
+        return res
+          .status(404)
+          .send("Không tìm thấy bài đăng hoặc bạn không có quyền xem!");
+      }
+
+      res.render("company/edit-job", {
+        title: "Chỉnh sửa bài đăng",
+        user: req.user,
+        job: job,
+      });
+    } catch (error: any) {
+      res.status(500).send("Lỗi tải trang sửa: " + error.message);
+    }
   }
   // Xử liệu dữ liệu khi ấn nút cập nhật bài đăng
-  static async postUpdateJob(req: Request, res: Response);
+  static async postUpdateJob(req: Request, res: Response) {
+    try {
+      const id = req.params.id as string;
+      const companyId = req.user?.id;
+      const { title, location, salary, skills, description } = req.body;
+      // Kiểm tra quyền truy cập
+      const existingJob = await prisma.job.findFirst({
+        where: {
+          id: id,
+          companyId: companyId,
+        },
+      });
+
+      if (!existingJob)
+        return res.status(403).send("Không có quyền sửa bài này!");
+
+      const skillArray = skills
+        ? skills
+            .split(",")
+            .map((s: string) => s.trim())
+            .filter(Boolean)
+        : [];
+
+      const cleanDescription = sanitizeHtml(description, {
+        allowedTags: [
+          "p",
+          "br",
+          "strong",
+          "em",
+          "u",
+          "h2",
+          "h3",
+          "ul",
+          "ol",
+          "li",
+          "a",
+        ],
+        allowedAttributes: { a: ["href", "target"] },
+      });
+
+      await prisma.job.update({
+        where: { id: id },
+        data: {
+          title,
+          location,
+          salary,
+          skills: skillArray,
+          description: cleanDescription,
+        },
+      });
+
+      res.redirect("/company/jobs");
+    } catch (error: any) {
+      res.status(500).send("Lỗi cập nhật: " + error.message);
+    }
+  }
 }

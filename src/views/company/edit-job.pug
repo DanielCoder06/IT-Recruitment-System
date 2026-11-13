@@ -1,0 +1,34 @@
+extends ./layout.pug
+
+block styles
+  link(rel="stylesheet", href="/css/job.css")
+
+block content
+    h1.page-title Chỉnh sửa bài đăng
+  
+    .form-wrapper
+        form#editForm(action=`/company/jobs/${job.id}/edit` method="POST")
+            .form-group
+                label Tiêu đề công việc (*)
+                input(type="text" name="title" required value=job.title)
+            .form-row
+                .form-group
+                    label Địa điểm (*)
+                    input(type="text" name="location" required value=job.location)
+                .form-group
+                    label Mức Lương (*)salary
+                    input(type="text" name="salary" required value=job.salary)
+            .form-group
+                label Kỹ năng (Cách nhau bằng dấu phẩy)
+                input(type="text" name="skills" required value=job.skills.join(', '))
+            .form-group
+                label Mô tả công việc (*)
+                textarea#editor(name="description")!= job.description
+
+            div(style="margin-top: 30px;")
+                button.btn-submit(type="submit") Cập nhật bài đăng 
+                a#btn-cancel.btn-cancel(href="/company/jobs") Hủy
+
+    script(src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js")
+    script(src="/js/edit-job.js")
+  
