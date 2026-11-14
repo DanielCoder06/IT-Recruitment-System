@@ -110,12 +110,35 @@
 }
 
 /* --- CSS CHO TRANG CHI TIẾT VIỆC LÀM --- */
+
+/* Style cho chữ Quay lại giống h1 */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px; /* To bằng h1 */
+  font-weight: 700; /* In đậm */
+  color: #1e293b; /* Màu xanh đen giống h1 */
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Hiệu ứng khi rê chuột vào */
+.btn-back:hover {
+  color: #10b981; /* Đổi sang màu xanh lá */
+}
+
+.btn-back:hover svg {
+  transform: translateX(-5px); /* Icon nhích nhẹ sang trái */
+  transition: transform 0.2s ease;
+}
 .job-detail-card {
+  max-width: 900px;
+  margin: 40px auto;
   background: #fff;
-  border-radius: 12px;
   padding: 40px;
+  border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
 }
 
 .job-detail-header {
