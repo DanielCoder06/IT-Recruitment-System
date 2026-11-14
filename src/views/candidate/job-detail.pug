@@ -4,10 +4,22 @@ block styles
     link(rel="stylesheet", href="/css/job-search.css")
 
 block content 
+    //- Thông báo ứng tuyển thành công
+    if success === 'applied'
+        div#toast-message.toast-success
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#10b981" width="24" height="24")
+                circle(cx="12" cy="12" r="12")
+                path(d="M17.5 7.5L10 15L6.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none")
+            span Ứng tuyển thành công! Nhà tuyển dụng sẽ sớm liên hệ với bạn.
+    else
+        if error === 'already_applied'
+            div#toast-message.toast-error
+                span Bạn đã ứng tuyển vào công việc này rồi!
+
     //- Nút quay lại
     a.btn-back(href="/jobs" )
         svg(xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16")
-                path(fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z")
+            path(fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z")
         | Quay lại danh sách việc làm
 
     .job-detail-card 
@@ -24,8 +36,32 @@ block content
             div.job-description!= job.description
         .job-detail-footer
             if user && user.role === 'CANDIDATE'
-                form(action=`/jobs/${job.id}/apply` method="POST")
-                    button.btn-apply(type='submit') Ứng tuyển ngay
+                if hasApplied
+                    button.btn-applied(type='button' disabled) Đã ứng tuyển
+                else  
+                    form(action=`/jobs/${job.id}/apply` method="POST")
+                        button.btn-apply(type='submit') Ứng tuyển ngay
             else 
                 p(style="color: #ef4444; font-weight: bold;")
                     | Bạn cần đăng nhập bằng tài khoản Ứng viên để ứng tuyển.
+    script.
+        document.addEventListener("DOMContentLoaded", () => {
+            const toast = document.getElementById("toast-message");
+            if (toast) {
+                // 1 Xóa tham số trên URL
+                window.history.replaceState(null, "", window.location.pathname);
+                
+                // 2 Hiệu ứng trượt vào
+                setTimeout(() => {
+                    toast.style.transform = "translateX(0)";
+                    toast.style.opacity = "1";
+                }, 100);
+
+                // 3 Tự động ẩn sau 5 giây
+                setTimeout(() => {
+                    toast.style.transform = "translateX(120%)";
+                    toast.style.opacity = "0";
+                    setTimeout(() => toast.remove(), 500);
+                }, 5000);
+            }
+        });

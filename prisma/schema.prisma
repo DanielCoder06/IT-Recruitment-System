@@ -21,6 +21,8 @@ model User {
   role      UserRole @default(CANDIDATE)
   
   job       Job[]
+  applications Application[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -37,13 +39,31 @@ model Job {
   description String    // Mô tả công việc
   location    String    // Địa điểm 
   salary      String    // Mức lương 
-  skills      String[]  // Mảng kỹ năng 
+  skills      String[]  //  Mảng kỹ năng 
   status      JobStatus @default(PUBLISHED)
   
   // Khóa ngoại liên kết với bảng User (người đăng bài - có role COMPANY)
   companyId   String
   company     User      @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
+  applications Application[]
+
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model Application {
+  id          String   @id @default(uuid())
+
+  jobId       String
+  job         Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)  
+
+  candidateId String
+  candidate   User     @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  status      String   @default("PENDING") // Trạng thái: PENDING, ACCEPTED, REJECTED
+  createdAt   DateTime @default(now())
+
+  // Một ứng viên chỉ được ứng tuyển 1 lần vào 1 công việc
+  @@unique([jobId, candidateId])
 }
