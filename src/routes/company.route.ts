@@ -3,6 +3,7 @@ import { CompanyController } from "../controllers/company.controller";
 import { requireAuth } from "../middlewares/auth.middleware";
 import { requireRole } from "../middlewares/role.middleware";
 import { UserRole } from "../generated/prisma/enums";
+import { compare } from "bcryptjs";
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.get("/jobs/:id/edit", CompanyController.getEditJobPage);
 router.post("/jobs/:id/edit", CompanyController.postUpdateJob);
 router.post("/jobs/:id/delete", CompanyController.postDeleteJob);
 router.get("/applications", CompanyController.getApplications);
+router.get("/jobs/:id/applicants", CompanyController.getJobApplicants);
 
 export default router;

@@ -1,0 +1,146 @@
+.page-header {
+  margin-bottom: 25px;
+}
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  color: #64748b;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+.btn-back:hover {
+  color: #007bff;
+}
+.page-title {
+  font-size: 24px;
+  color: #1e293b;
+  margin: 0;
+}
+.job-title-highlight {
+  color: #007bff;
+}
+
+/* Grid hiển thị các thẻ ứng viên */
+.applicant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Thẻ ứng viên */
+.applicant-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.applicant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+}
+
+/* Phần Header của thẻ (Avatar + Tên) */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 15px;
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  background: #e0e7ff;
+  color: #4338ca;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+.candidate-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 5px 0;
+}
+.candidate-email {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Phần Body của thẻ (Thông tin thêm) */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.meta-label {
+  color: #64748b;
+}
+.meta-value {
+  font-weight: 500;
+  color: #1e293b;
+}
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge-pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Phần Footer (Nút bấm) */
+.card-footer {
+  margin-top: auto;
+}
+.btn-view-cv {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #f8fafc;
+  color: #007bff;
+  border: 1px solid #cbd5e1;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.btn-view-cv:hover {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* Trạng thái rỗng */
+.empty-state {
+  background: #fff;
+  padding: 40px;
+  text-align: center;
+  border-radius: 8px;
+  color: #94a3b8;
+  font-size: 16px;
+  border: 1px dashed #cbd5e1;
+}

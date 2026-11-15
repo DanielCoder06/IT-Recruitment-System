@@ -1,0 +1,36 @@
+extends ./layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/applicants.css")
+
+block content 
+    .page-header
+        a.btn-back(href="/company/applications") ← Quay lại danh sách quản lý
+        h1.page-title Ứng viên nộp đơn: <span class="job-title-highlight">#{job.title}</span>
+
+    if applications.length === 0
+        .empty-state
+            | Chưa có ứng viên nào nộp đơn vào vị trí này.
+            br
+            | Vui lòng chờ đợi hoặc chia sẻ bài đăng để thu hút thêm ứng viên nhé!
+    else
+        .applicant-grid
+            each app in applications
+                .applicant-card
+                    .card-header
+                        //- Lấy chữ cái đầu tiên của tên làm Avatar
+                        .avatar= app.candidate.fullName.charAt(0).toUpperCase()
+                        .info
+                            h3.candidate-name= app.candidate.fullName
+                            p.candidate-email= app.candidate.email
+                    
+                    .card-body
+                        .meta-item
+                            span.meta-label Ngày nộp:
+                            span.meta-value= app.createdAt.toLocaleDateString('vi-VN')
+                        .meta-item
+                            span.meta-label Trạng thái:
+                            span.badge.badge-pending= app.status
+                    
+                    .card-footer
+                        a.btn-view-cv(href="#") Xem hồ sơ & CV

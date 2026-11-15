@@ -277,4 +277,30 @@ export class CompanyController {
       res.status(500).send("Lỗi tải danh sách: " + error.message);
     }
   }
+
+  // Hiện thị ứng viên ứng tuyển theo job
+  static async getJobApplicants(req: Request, res: Response) {
+    try {
+      const companyId = req.user?.id;
+      const jobId = req.params.id as string;
+      const job = await prisma.job.findFirst({
+        where: {
+          id: jobId,
+          companyId: companyId,
+        },
+      });
+
+      if (!job) return res.status(403).send("Không có quyền sửa bài này!");
+      const applications = await prisma.application.findMany({
+        where: { jobId: jobId },
+        include: { candidate: true },
+        orderBy: { createdAt: "desc" },
+      });
+      res.render("company/applicants", {
+        title: "Chi tiết ứng viên",
+        applications: applications,
+        job: job,
+      });
+    } catch (error: any) {}
+  }
 }
