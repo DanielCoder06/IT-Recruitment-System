@@ -27,7 +27,8 @@ block content
                             td
                                 a.job-title-link(href=`/company/jobs/${job.id}`)= job.title
                             td= job.createdAt.toLocaleDateString('vi-VN')
-                            td.job-total-candidate= job._count.applications
+                            td(style="text-align: center")
+                                span.job-total-candidate= job._count.applications
                             td
                                 if job.applications.length > 0
                                     = job.applications[0].createdAt.toLocaleDateString('vi-VN')
