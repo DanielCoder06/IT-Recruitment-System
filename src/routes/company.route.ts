@@ -17,5 +17,6 @@ router.get("/jobs/:id", CompanyController.getJobDetail);
 router.get("/jobs/:id/edit", CompanyController.getEditJobPage);
 router.post("/jobs/:id/edit", CompanyController.postUpdateJob);
 router.post("/jobs/:id/delete", CompanyController.postDeleteJob);
+router.get("/applications", CompanyController.getApplications);
 
 export default router;

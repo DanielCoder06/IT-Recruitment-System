@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../configs/prisma.client";
 import sanitizeHtml from "sanitize-html";
+import { threadCpuUsage } from "node:process";
 
 export class CompanyController {
   // Render giao diện dashboard
@@ -245,6 +246,35 @@ export class CompanyController {
       res.redirect("/company/jobs?success=deleted");
     } catch (error: any) {
       res.status(500).send("Lỗi xóa: " + error.message);
+    }
+  }
+
+  // Hiển thị danh sách ứng viên ứng với mỗi job
+  static async getApplications(req: Request, res: Response) {
+    try {
+      const companyId = req.user?.id;
+      const jobs = await prisma.job.findMany({
+        where: { companyId: companyId },
+        orderBy: { createdAt: "desc" },
+        include: {
+          _count: {
+            select: { applications: true },
+          },
+          applications: {
+            orderBy: { createdAt: "desc" },
+            take: 1,
+            select: { createdAt: true },
+          },
+        },
+      });
+
+      res.render("company/applications", {
+        title: "Quản lý đơn ứng viên",
+        user: req.user,
+        jobs: jobs,
+      });
+    } catch (error: any) {
+      res.status(500).send("Lỗi tải danh sách: " + error.message);
     }
   }
 }
