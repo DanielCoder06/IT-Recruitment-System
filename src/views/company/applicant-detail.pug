@@ -1,0 +1,108 @@
+extends ./layout.pug 
+
+include ../mixins/toast.pug
+
+block styles 
+    link(rel="stylesheet", href="/css/applicant-detail.css")
+
+block content 
+    if success
+        - const msg = success === 'accepted' ? 'Đã chấp nhận ứng viên!' : 'Đã từ chối ứng viên!'
+        +toast(msg, 'success')
+
+    - const backUrl = application.job ? `/company/jobs/${application.job.id}/applicants` : '/company/applications'
+    
+    .detail-header-wrapper
+        a.title-back(href=backUrl)
+            svg(xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16")
+                path(fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z")
+            | Quay lại danh sách ứng viên 
+
+    .applicant-layout
+        //- ================= CỘT TRÁI =================
+        .main-details-scroll
+            .section-card
+                h3.title Technical Skills
+                .skills-container
+                    span.skill-tag JavaScript
+                    span.skill-tag Node.js
+                    span.skill-tag Express.js
+                    span.skill-tag PostgreSQL
+                    span.skill-tag Prisma
+                    span.skill-tag ReactJS
+                    span.skill-tag Docker
+
+            .section-card
+                h3.title Dự án đã tham gia
+                .timeline
+                    .timeline-item
+                        .project-header
+                            h4 Hệ thống Quản lý Bán hàng (E-commerce API)
+                            a.repo-link(href="https://github.com/example/ecommerce-api" target="_blank") GitHub Repo
+                        span.time 01/2025 - 06/2025
+                        .project-description
+                            p 
+                                strong Công nghệ: 
+                                | Node.js, Express, PostgreSQL, Prisma.
+                            p Thiết kế cơ sở dữ liệu và xây dựng RESTful API cho hệ thống bán hàng.
+
+            .section-card
+                h3.title Chứng chỉ
+                ul.cert-list
+                    li
+                        strong TOEIC 800
+                        span (IIG Việt Nam - 2024)
+                    li
+                        strong AWS Certified Cloud Practitioner
+                        span (Amazon Web Services - 2025)
+
+        //- ================= CỘT PHẢI =================
+        .profile-sidebar
+            .profile-basic
+                //- 1. Tính toán các giá trị an toàn trước
+                - const candName = application.candidate ? application.candidate.fullName : 'Không xác định'
+                - const candEmail = application.candidate ? application.candidate.email : 'Chưa có email'
+                - const avatarText = (candName !== 'Không xác định' && candName) ? candName.charAt(0).toUpperCase() : '?'
+
+                //- 2. Sau đó mới đưa vào HTML
+                .avatar-large= avatarText
+                h2= candName
+                p= candEmail
+            
+            hr
+
+            .education-info
+                h3 Học vấn
+                .edu-item
+                    p.edu-label Trường học:
+                    p.edu-value Đại học Bách Khoa TP.HCM
+                .edu-item
+                    p.edu-label Ngành học:
+                    p.edu-value Khoa học Máy tính
+                .edu-item
+                    p.edu-label Khóa:
+                    p.edu-value 2021 - 2025
+            
+            hr
+
+            .action-section
+                h3 Trạng thái
+                if application.status === 'PENDING'
+                    span.badge.badge-pending Đang chờ duyệt
+                else if application.status === 'ACCEPTED'
+                    span.badge.badge-accepted Đã chấp nhận
+                else 
+                    span.badge.badge-rejected Đã từ chối
+
+                if application.status === 'PENDING'
+                    .action-buttons(style="margin-top: 15px;")
+                        form(action=`/company/applications/${application.id}/status` method="POST" style="margin-bottom: 10px;")
+                            input(type="hidden" name="status" value="ACCEPTED")
+                            button.btn-accept(type="submit") Chấp nhận
+                        
+                        form(action=`/company/applications/${application.id}/status` method="POST")
+                            input(type="hidden" name="status" value="REJECTED")
+                            button.btn-reject(type="submit") Từ chối
+
+block scripts
+    script(src="/js/toast.js")

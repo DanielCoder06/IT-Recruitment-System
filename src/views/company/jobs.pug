@@ -1,14 +1,16 @@
 extends ./layout.pug
 
+//- Include Mixin
+include ../mixins/toast.pug
+
 block styles
-    link(rel="stylesheet", href="/css/job.css")
+  link(rel="stylesheet", href="/css/job.css")
+
 block content   
+    //- Gọi Mixin Toast
     if success 
-        div#success-message.toast-message
-            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#10b981" width="24" height="24")
-                circle(cx="12" cy="12" r="12")
-                path(d="M17.5 7.5L10 15L6.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none")
-            span= success === 'updated' ? 'Cập nhật bài đăng thành công!' : 'Xóa bài đăng thành công!'
+        - const msg = success === 'updated' ? 'Cập nhật bài đăng thành công!' : 'Xóa bài đăng thành công!'
+        +toast(msg, 'success')
 
     .page-header
         h1.page-title Quản lý bài đăng tuyển dụng
@@ -37,16 +39,16 @@ block content
                             td= job.createdAt.toLocaleDateString('vi-VN')
                             td 
                                 if job.status === 'PUBLISHED'
-                                    span.status-badge.status-published Đang tuyển 
+                                    span.badge.badge-accepted Đang tuyển 
                                 else
-                                    span.status-badge.status-draft Bản nháp
+                                    span.badge.badge-pending Bản nháp
                             td.action-links
-                                a.btn-view(href=`/company/jobs/${job.id}`)
-                                    | Xem
-                                a.btn-edit(href=`/company/jobs/${job.id}/edit`)
-                                    | Sửa
+                                a.btn-view(href=`/company/jobs/${job.id}`) Xem
+                                a.btn-edit(href=`/company/jobs/${job.id}/edit`) Sửa
                                 form.delete-form(action=`/company/jobs/${job.id}/delete` method="POST")
-                                    button.btn-delete(type="submit")
-                                        |  Xóa
-    
-    script(src="/js/jobs.js") 
+                                    button.btn-delete(type="submit") Xóa
+
+//- Nhúng file JS
+block scripts
+    script(src="/js/jobs.js")
+    script(src="/js/toast.js")

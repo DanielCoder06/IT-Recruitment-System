@@ -20,5 +20,10 @@ router.post("/jobs/:id/edit", CompanyController.postUpdateJob);
 router.post("/jobs/:id/delete", CompanyController.postDeleteJob);
 router.get("/applications", CompanyController.getApplications);
 router.get("/jobs/:id/applicants", CompanyController.getJobApplicants);
+router.get("/applications/:id", CompanyController.getApplicantDetail);
+router.post(
+  "/applications/:id/status",
+  CompanyController.postUpdateApplicationStatus,
+);
 
 export default router;

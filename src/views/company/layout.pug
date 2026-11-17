@@ -4,10 +4,11 @@ html(lang="vi")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title= title
-    link(rel="stylesheet", href="/css/company.css")
-
-    block styles
     
+    link(rel="stylesheet", href="/css/base.css")
+    link(rel="stylesheet", href="/css/company.css")
+    
+    block styles
   body
     .company-layout
       //- TOPBAR
@@ -19,22 +20,21 @@ html(lang="vi")
         
       //- BODY WRAPPER
       .body-wrapper
-        //- SIDEBAR (ASIDE)
+        //- SIDEBAR
         aside.sidebar
           ul.menu
             li 
-              a(href="/company/dashboard" class=(currentPath.startsWith('/company/dashboard') ? 'active' : ''))
-                | Tổng quan
+              a(href="/company/dashboard" class=(currentPath === '/company/dashboard' ? 'active' : '')) Tổng quan
             li 
-              a(href="/company/jobs" class=(currentPath.startsWith('/company/jobs') && !currentPath.endsWith('/applicants') ? 'active' : ''))
-                | Quản lý bài đăng
+              a(href="/company/jobs" class=(currentPath.startsWith('/company/jobs') && !currentPath.includes('/applicants') ? 'active' : '')) Quản lý bài đăng
             li 
-              a(href="/company/applications" class=(currentPath === '/company/applications' || currentPath.endsWith('/applicants') ? 'active' : ''))
-                | Quản lý đơn ứng tuyển
+              a(href="/company/applications" class=(currentPath.startsWith('/company/applications') || currentPath.includes('/applicants') ? 'active' : '')) Quản lý đơn ứng tuyển
             li 
-              a(href="/company/profile" class=(currentPath === '/company/profile' ? 'active' : ''))
-                | Hồ sơ công ty
+              a(href="/company/profile" class=(currentPath.startsWith('/company/profile') ? 'active' : '')) Hồ sơ công ty
 
         //- MAIN CONTENT
         main.main-content
           block content
+          
+    //- 3. Khối nhúng Script dùng chung
+    block scripts

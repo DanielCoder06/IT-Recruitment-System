@@ -1,3 +1,5 @@
+/* public/css/applicants.css */
+
 .page-header {
   margin-bottom: 25px;
 }
@@ -6,7 +8,6 @@
   align-items: center;
   color: #64748b;
   font-weight: 600;
-  text-decoration: none;
   margin-bottom: 10px;
   transition: 0.2s;
 }
@@ -22,14 +23,11 @@
   color: #007bff;
 }
 
-/* Grid hiển thị các thẻ ứng viên */
 .applicant-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 }
-
-/* Thẻ ứng viên */
 .applicant-card {
   background: #fff;
   border-radius: 12px;
@@ -47,8 +45,6 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
   border-color: #cbd5e1;
 }
-
-/* Phần Header của thẻ (Avatar + Tên) */
 .card-header {
   display: flex;
   align-items: center;
@@ -80,8 +76,6 @@
   color: #64748b;
   margin: 0;
 }
-
-/* Phần Body của thẻ (Thông tin thêm) */
 .card-body {
   display: flex;
   flex-direction: column;
@@ -100,18 +94,6 @@
   font-weight: 500;
   color: #1e293b;
 }
-.badge {
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
-.badge-pending {
-  background: #fef3c7;
-  color: #b45309;
-}
-
-/* Phần Footer (Nút bấm) */
 .card-footer {
   margin-top: auto;
 }
@@ -125,7 +107,6 @@
   padding: 10px;
   border-radius: 6px;
   font-weight: 600;
-  text-decoration: none;
   transition: 0.2s;
 }
 .btn-view-cv:hover {
@@ -133,8 +114,6 @@
   color: #fff;
   border-color: #007bff;
 }
-
-/* Trạng thái rỗng */
 .empty-state {
   background: #fff;
   padding: 40px;

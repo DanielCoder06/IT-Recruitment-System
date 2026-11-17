@@ -1,10 +1,13 @@
+/* public/css/base.css */
+
+/* 1. Reset CSS (Chỉ để ở đây duy nhất 1 lần) */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
 }
 body {
-  font-family: Arial, Helvetica, sans-serif;
   background-color: #f4f7f6;
   color: #333;
   line-height: 1.6;
@@ -13,8 +16,67 @@ a {
   text-decoration: none;
   color: #007bff;
 }
-.container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
+
+/* 2. Toast Notification (Dùng chung cho mọi trang) */
+.toast-message {
+  position: fixed;
+  top: 80px;
+  right: 30px;
+  z-index: 9999;
+  background-color: #fff;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: translateX(120%); /* Ẩn mặc định */
+  opacity: 0;
+}
+.toast-message.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+.toast-success {
+  border-left: 5px solid #10b981;
+  color: #065f46;
+}
+.toast-error {
+  border-left: 5px solid #ef4444;
+  color: #991b1b;
+}
+
+/* 3. Badges (Dùng chung cho mọi trạng thái) */
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+}
+.badge-pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+.badge-accepted {
+  background: #dcfce7;
+  color: #15803d;
+}
+.badge-rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.badge-admin {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.badge-company {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+.badge-candidate {
+  background: #dcfce7;
+  color: #15803d;
 }

@@ -272,6 +272,7 @@ export class CompanyController {
         title: "Quản lý đơn ứng viên",
         user: req.user,
         jobs: jobs,
+        activeMenu: "applications",
       });
     } catch (error: any) {
       res.status(500).send("Lỗi tải danh sách: " + error.message);
@@ -291,6 +292,7 @@ export class CompanyController {
       });
 
       if (!job) return res.status(403).send("Không có quyền sửa bài này!");
+
       const applications = await prisma.application.findMany({
         where: { jobId: jobId },
         include: { candidate: true },
@@ -300,7 +302,74 @@ export class CompanyController {
         title: "Chi tiết ứng viên",
         applications: applications,
         job: job,
+        activeMenu: "applications",
       });
-    } catch (error: any) {}
+    } catch (error: any) {
+      res.status(500).send("Lỗi tải danh sách: " + error.message);
+    }
+  }
+
+  // Hiển thị chi tiết thông tin  ứng viên
+  static async getApplicantDetail(req: Request, res: Response) {
+    try {
+      const companyId = req.user?.id;
+      const applicationId = req.params.id as string;
+
+      const application = await prisma.application.findUnique({
+        where: { id: applicationId },
+        include: { candidate: true, job: true },
+      });
+
+      if (!application) {
+        return res.status(404).send("Không tìm thấy hồ sơ ứng tuyển này!");
+      }
+
+      if (application.job.companyId !== companyId) {
+        return res.status(403).send("Bạn không có quyền xem hồ sơ này!");
+      }
+
+      res.render("company/applicant-detail", {
+        title: "Chi tiết ứng viên",
+        application: application,
+        user: req.user,
+        activeMenu: "applications",
+        success: req.query.success,
+      });
+    } catch (error: any) {
+      res.status(500).send("Lỗi tải hồ sơ ứng viên: " + error.message);
+    }
+  }
+
+  // Xử lý duyệt/từ chối ứng viên
+  static async postUpdateApplicationStatus(req: Request, res: Response) {
+    try {
+      const companyId = req.user?.id;
+      if (!companyId) return res.redirect("/auth/login");
+
+      const applicationId = req.params.id as string;
+      const status = req.body.status;
+
+      const existingApplication = await prisma.application.findFirst({
+        where: {
+          id: applicationId,
+          job: { companyId: companyId },
+        },
+      });
+      if (!existingApplication) {
+        return res
+          .status(403)
+          .send("Bạn không có quyền thay đổi trạng thái hồ sơ này!");
+      }
+      await prisma.application.update({
+        where: { id: applicationId },
+        data: { status: status },
+      });
+
+      const action = status === "ACCEPTED" ? "accepted" : "rejected";
+
+      res.redirect(`/company/applications/${applicationId}?success=${action}`);
+    } catch (error: any) {
+      res.status(500).send("Lỗi cập nhật trạng thái: " + error.message);
+    }
   }
 }
