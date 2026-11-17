@@ -1,32 +1,38 @@
 doctype html
 html(lang="vi")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title= title || 'Hệ thống Tuyển dụng IT'
-        link(rel="stylesheet", href="/css/base.css")
-        link(rel="stylesheet", href="/css/navbar.css")    
-
-        block styles
-    body 
-        header.navbar
-            .logo
-                a(href="/") IT-Recruitment 
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title || 'Hệ thống Tuyển dụng IT'
+    link(rel="stylesheet", href="/css/base.css")
+    link(rel="stylesheet", href="/css/navbar.css")
+    block styles
+      
+  body
+    header.navbar
+      .logo
+        a(href="/") IT-Recruitment 
+      
+      if user
+        nav.menu   
+          .nav-indicator 
+          a(href="/" class=(currentPath === '/' ? 'active' : '')) Trang chủ
+          if user.role === 'ADMIN'
+            a(href="/admin/users" class=(currentPath === '/admin/users' ? 'active' : '')) Quản trị
+          else if user.role === 'COMPANY'
+            a(href="/company/dashboard" class=(currentPath === '/company/dashboard' ? 'active' : '')) Trang Công ty
+          else 
+            a(href="/candidate/dashboard" class=(currentPath === '/candidate/dashboard' ? 'active' : '')) Trang Cá nhân
             
-            //- Menu phải nằm trong header để dàn ngang với logo
-            if user
-                nav.menu 
-                    a(href="/") Trang chủ
-                    a(href="/dashboard") Trang cá nhân 
-                    a(href="/auth/logout" style="color: #ef4444;") Đăng xuất
-            else
-                nav.menu 
-                    a(href="/") Trang chủ
-                    a(href="/auth/login") Đăng nhập 
-                    a(href="/auth/register") Đăng ký
+          a(href="/auth/logout" style="color: #ef4444;") Đăng xuất
+      else
+        nav.menu 
+          a(href="/" class=(currentPath === '/' ? 'active' : '')) Trang chủ
+          a(href="/auth/login" class=(currentPath === '/auth/login' ? 'active' : '')) Đăng nhập 
+          a(href="/auth/register" class=(currentPath === '/auth/register' ? 'active' : '')) Đăng ký
 
-        main.container
-            block content
+    main.container
+      block content
 
-        footer.footer 
-            p © 2026 Hệ thống Tuyển dụng IT
+    footer.footer 
+      p © 2026 Hệ thống Tuyển dụng IT.

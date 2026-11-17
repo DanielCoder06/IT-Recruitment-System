@@ -11,7 +11,12 @@ block content
         
         .hero-actions
             if user
-                a.btn(href="/dashboard") Vào Trang Cá Nhân
+                if user.role === 'ADMIN'
+                    a.btn(href="/admin/users") Vào trang Quản trị
+                else if user.role === 'COMPANY'
+                    a.btn(href="/company/dashboard") Vào trang Quản lý
+                else 
+                    a.btn(href="/candidate/dashboard") Vào Trang Cá Nhân
             else
                 a.btn(href="/auth/register") Bắt đầu ngay
                 a.btn.btn-outline(href="/auth/login") Đăng nhập

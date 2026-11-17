@@ -2,12 +2,9 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
-// import { prisma } from "./configs/prisma.client";
 import authRoute from "./routes/auth.route";
 import cookieParser from "cookie-parser";
-import dashboardRoute from "./routes/dashboard.route";
 import jwt from "jsonwebtoken";
-// import { AdminController } from "./controllers/admin.controller";
 import adminRoute from "./routes/admin.route";
 import companyRoute from "./routes/company.route";
 import candidateRoute from "./routes/candidate.route";
@@ -48,7 +45,6 @@ app.use((req: Request, res: Response, next) => {
 });
 
 app.use("/auth", authRoute);
-app.use("/dashboard", dashboardRoute);
 app.use("/admin", adminRoute);
 app.use("/company", companyRoute);
 app.use("/candidate", candidateRoute);

@@ -9,22 +9,35 @@
   top: 0;
   z-index: 100;
 }
+
 .navbar .logo a {
   font-size: 24px;
   font-weight: 800;
   color: #0056b3;
   text-decoration: none;
 }
+
 .navbar .menu {
   display: flex;
-  gap: 25px;
+  gap: 10px;
   align-items: center;
 }
+
 .navbar .menu a {
   font-weight: 500;
   color: #475569;
-  transition: all 0.2s ease;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
-.navbar .menu a:hover {
-  color: #0056b3;
+
+.navbar .menu a:hover,
+.navbar .menu a.active {
+  background-color: #007bff;
+  color: white;
+  text-shadow:
+    0.5px 0 0 currentColor,
+    -0.5px 0 0 currentColor;
 }
